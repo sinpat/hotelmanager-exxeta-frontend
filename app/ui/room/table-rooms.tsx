@@ -1,7 +1,7 @@
 import { EditRoom, DeleteRoom, ViewRoom } from '@/app/ui/room/buttons';
 import { fetchRooms } from '@/app/lib/api';
 
-export default async function InvoicesTable({ query }: { query: string }) {
+export default async function RoomTable({ query }: { query: string }) {
   const rooms = await fetchRooms();
 
   return (
@@ -19,6 +19,9 @@ export default async function InvoicesTable({ query }: { query: string }) {
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Minibar
+                </th>
+                <th scope="col" className="px-3 py-5 font-medium">
+                  Status
                 </th>
                 <th scope="col" className="relative py-3 pl-6 pr-3">
                   <span className="sr-only">Edit</span>
@@ -39,6 +42,9 @@ export default async function InvoicesTable({ query }: { query: string }) {
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {room.hasMinibar ? 'Ja' : 'Nein'}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {room.vacant ? 'Frei' : 'Gebucht'}
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">

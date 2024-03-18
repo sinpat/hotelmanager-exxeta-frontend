@@ -1,4 +1,5 @@
 import Breadcrumbs from '@/app/ui/room/breadcrumbs';
+import BookingTable from '@/app/ui/room/table-bookings';
 import { notFound } from 'next/navigation';
 import { Metadata } from 'next';
 import { fetchRoomByNumber } from '@/app/lib/api';
@@ -33,7 +34,7 @@ export default async function Page({
         ]}
       />
       <h1 className={`${lusitana.className} text-2xl`}>Buchungen</h1>
-      coming soon...
+      <BookingTable room={room} />
     </main>
   );
 }
