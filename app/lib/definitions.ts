@@ -4,6 +4,7 @@ export type Room = {
   hasMinibar: boolean;
   vacant: boolean;
   bookings: Booking[];
+  currentBooking: Booking | null;
 };
 
 export type Booking = {

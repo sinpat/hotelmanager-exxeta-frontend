@@ -24,6 +24,9 @@ export default async function RoomTable({ room }: { room: Room }) {
                 <th scope="col" className="px-3 py-5 font-medium">
                   Abreise
                 </th>
+                <th scope="col" className="relative px-3 py-3">
+                  <span className="sr-only">Buchung aktiv</span>
+                </th>
               </tr>
             </thead>
             <tbody className="bg-white">
@@ -43,6 +46,14 @@ export default async function RoomTable({ room }: { room: Room }) {
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {formatDateToLocal(booking.endDate)}
+                  </td>
+                  <td className="whitespace-nowrap px-3 py-3">
+                    {room.currentBooking?.bookingReference ===
+                    booking.bookingReference ? (
+                      <>
+                        <b>Aktiv</b>
+                      </>
+                    ) : null}
                   </td>
                 </tr>
               ))}

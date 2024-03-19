@@ -1,5 +1,6 @@
 import { EditRoom, DeleteRoom, ViewRoom } from '@/app/ui/room/buttons';
 import { fetchRooms } from '@/app/lib/api';
+import RoomStatus from './status';
 
 export default async function RoomTable({ query }: { query: string }) {
   const rooms = await fetchRooms();
@@ -44,7 +45,7 @@ export default async function RoomTable({ query }: { query: string }) {
                     {room.hasMinibar ? 'Ja' : 'Nein'}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {room.vacant ? 'Frei' : 'Gebucht'}
+                    <RoomStatus room={room} />
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
