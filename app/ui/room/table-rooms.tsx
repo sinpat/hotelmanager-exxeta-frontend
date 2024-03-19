@@ -3,8 +3,8 @@ import { fetchRooms } from '@/app/lib/api';
 import RoomStatus from './status';
 
 export type RoomFilter = {
-  minibar: Boolean;
-  vacant: Boolean;
+  hasMinibar: Boolean;
+  isVacant: Boolean;
 };
 
 export default async function RoomTable({

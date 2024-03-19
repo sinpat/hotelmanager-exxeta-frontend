@@ -9,8 +9,8 @@ export default function RoomStatus({ room }: { room: Room }) {
       className={clsx(
         'inline-flex items-center rounded-full px-2 py-1 text-xs',
         {
-          'bg-gray-100 text-gray-500': !room.vacant,
-          'bg-green-500 text-white': room.vacant,
+          'bg-gray-100 text-gray-500': !room.isVacant,
+          'bg-green-500 text-white': room.isVacant,
         },
       )}
     >

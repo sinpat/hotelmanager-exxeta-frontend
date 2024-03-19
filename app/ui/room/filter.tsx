@@ -7,7 +7,7 @@ export default function RoomFilter() {
   const { replace } = useRouter();
   const pathname = usePathname();
 
-  const handleFilter = (key: 'minibar' | 'vacant', value: Boolean) => {
+  const handleFilter = (key: 'hasMinibar' | 'isVacant', value: Boolean) => {
     console.log(`Filter change... ${key} ${value}`);
     const params = new URLSearchParams(searchParams);
 
@@ -25,8 +25,8 @@ export default function RoomFilter() {
         <input
           id="filterMinibar"
           type="checkbox"
-          onChange={(e) => handleFilter('minibar', e.target.checked)}
-          defaultChecked={Boolean(searchParams.get('minibar'))}
+          onChange={(e) => handleFilter('hasMinibar', e.target.checked)}
+          defaultChecked={Boolean(searchParams.get('hasMinibar'))}
           className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
         />
         <label htmlFor="filterMinibar" className="block font-medium">
@@ -38,8 +38,8 @@ export default function RoomFilter() {
         <input
           id="filterVacant"
           type="checkbox"
-          onChange={(e) => handleFilter('vacant', e.target.checked)}
-          defaultChecked={Boolean(searchParams.get('vacant'))}
+          onChange={(e) => handleFilter('isVacant', e.target.checked)}
+          defaultChecked={Boolean(searchParams.get('isVacant'))}
           className="h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2"
         />
         <label htmlFor="filterMinibar" className="block font-medium">

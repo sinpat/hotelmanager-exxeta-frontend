@@ -14,12 +14,12 @@ export default async function Page({
   searchParams,
 }: {
   searchParams?: {
-    minibar?: string;
-    vacant?: string;
+    hasMinibar?: string;
+    isVacant?: string;
   };
 }) {
-  const minibar = Boolean(searchParams?.minibar);
-  const vacant = Boolean(searchParams?.vacant);
+  const hasMinibar = Boolean(searchParams?.hasMinibar);
+  const isVacant = Boolean(searchParams?.isVacant);
 
   return (
     <div className="w-full">
@@ -31,10 +31,10 @@ export default async function Page({
         <CreateRoom />
       </div>
       <Suspense
-        key={`${minibar}${vacant}`}
+        key={`${hasMinibar}${isVacant}`}
         fallback={<InvoicesTableSkeleton />}
       >
-        <Table roomFilter={{ minibar, vacant }} />
+        <Table roomFilter={{ hasMinibar, isVacant }} />
       </Suspense>
       {/* <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPages} />

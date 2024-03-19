@@ -33,8 +33,8 @@ const RoomFormSchema = z.object({
 export async function fetchRooms(filter: RoomFilter): Promise<Room[]> {
   return Axios.get<Room[]>(`${BASE_URL}/room/all`, {
     params: {
-      hasMinibar: filter.minibar || undefined,
-      isVacant: filter.vacant || undefined,
+      hasMinibar: filter.hasMinibar || undefined,
+      isVacant: filter.isVacant || undefined,
     },
   })
     .then((res) => res.data)

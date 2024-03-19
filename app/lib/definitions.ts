@@ -5,7 +5,7 @@ export type Room = {
   roomNumber: number;
   roomType: string;
   hasMinibar: boolean;
-  vacant: boolean;
+  isVacant: boolean;
   bookings: Booking[];
   currentBooking: Booking | null;
 };
