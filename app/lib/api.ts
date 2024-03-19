@@ -37,7 +37,7 @@ export async function fetchRooms(filter: RoomFilter): Promise<Room[]> {
       isVacant: filter.isVacant || undefined,
     },
   })
-    .then((res) => res.data)
+    .then((res) => res.data.sort((a, b) => a.roomNumber - b.roomNumber))
     .catch((error) => {
       console.error('There was an error fetching rooms', error);
       throw new Error('Failed to fetch rooms');

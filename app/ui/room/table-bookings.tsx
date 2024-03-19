@@ -1,10 +1,7 @@
-import { fetchRooms } from '@/app/lib/api';
 import { Room } from '@/app/lib/definitions';
 import { formatDateToLocal } from '@/app/lib/utils';
 
 export default async function RoomTable({ room }: { room: Room }) {
-  const rooms = await fetchRooms();
-
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
