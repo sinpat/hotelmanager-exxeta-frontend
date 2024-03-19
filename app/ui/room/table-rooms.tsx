@@ -18,7 +18,39 @@ export default async function RoomTable({
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
         <div className="rounded-lg bg-gray-50 p-2 md:pt-0">
-          <table className="hidden min-w-full text-gray-900 md:table">
+          {/* For small screens */}
+          <div className="lg:hidden">
+            {rooms?.map((room) => (
+              <div
+                key={room.roomNumber}
+                className="mb-2 w-full rounded-md bg-white p-4"
+              >
+                <div className="flex items-center justify-between border-b pb-4">
+                  <div>
+                    <div className="mb-2 flex items-center">
+                      <p>{room.roomNumber}</p>
+                    </div>
+                    <p className="text-sm text-gray-500">{room.roomType}</p>
+                    <p className="text-sm text-gray-500">
+                      {room.hasMinibar ? 'Minibar' : null}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex w-full items-center justify-between pt-4">
+                  <div>
+                    <RoomStatus room={room} />
+                  </div>
+                  <div className="flex justify-end gap-2">
+                    <ViewRoom roomNumber={room.roomNumber} />
+                    <EditRoom roomNumber={room.roomNumber} />
+                    <DeleteRoom roomNumber={room.roomNumber} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+          {/* For big screens */}
+          <table className="hidden min-w-full text-gray-900 lg:table">
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
