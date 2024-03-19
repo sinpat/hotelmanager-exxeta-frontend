@@ -1,10 +1,11 @@
 'use server';
 
 import Axios from 'axios';
-import { Room } from './definitions';
+import { Room, RoomUpsert } from './definitions';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { RoomFilter } from '../ui/room/table-rooms';
 
 // This is temporary until @types/react-dom is updated
 export type State = {
@@ -29,8 +30,13 @@ const RoomFormSchema = z.object({
   hasMinibar: z.boolean(),
 });
 
-export async function fetchRooms(): Promise<Room[]> {
-  return Axios.get<Room[]>(`${BASE_URL}/room/all`)
+export async function fetchRooms(filter: RoomFilter): Promise<Room[]> {
+  return Axios.get<Room[]>(`${BASE_URL}/room/all`, {
+    params: {
+      hasMinibar: filter.minibar || undefined,
+      isVacant: filter.vacant || undefined,
+    },
+  })
     .then((res) => res.data)
     .catch((error) => {
       console.error('There was an error fetching rooms', error);
@@ -61,7 +67,7 @@ export async function createRoom(prevState: State, formData: FormData) {
       message: 'Bitte Eingaben überprüfen.',
     };
   }
-  const room: Room = fieldValidation.data;
+  const room: RoomUpsert = fieldValidation.data;
   console.log('New room:', room);
   await Axios.post<Room>(`${BASE_URL}/room`, room).catch((error) => {
     console.error('There was an error creating the room', error);
@@ -91,9 +97,9 @@ export async function updateRoom(
       message: 'Bitte Eingaben überprüfen.',
     };
   }
-  const room: Room = fieldValidation.data;
+  const room: RoomUpsert = fieldValidation.data;
   console.log('Updated room:', room);
-  await Axios.put<Room>(`${BASE_URL}/room/${room.roomNumber}`, room).catch(
+  await Axios.put<Room>(`${BASE_URL}/room/${roomNumber}`, room).catch(
     (error) => {
       console.error('There was an error updating the room', error);
       return {

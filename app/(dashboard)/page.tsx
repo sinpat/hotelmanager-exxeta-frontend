@@ -1,10 +1,10 @@
-import Search from '@/app/ui/search';
 import Table from '@/app/ui/room/table-rooms';
 import { lusitana } from '@/app/ui/fonts';
 import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
 import { Metadata } from 'next';
 import { CreateRoom } from '../ui/room/buttons';
+import RoomFilter from '@/app/ui/room/filter';
 
 export const metadata: Metadata = {
   title: 'Zimmerübersicht',
@@ -14,12 +14,12 @@ export default async function Page({
   searchParams,
 }: {
   searchParams?: {
-    query?: string;
-    page?: string;
+    minibar?: string;
+    vacant?: string;
   };
 }) {
-  const query = searchParams?.query || '';
-  const currentPage = Number(searchParams?.page) || 1;
+  const minibar = Boolean(searchParams?.minibar);
+  const vacant = Boolean(searchParams?.vacant);
 
   return (
     <div className="w-full">
@@ -27,11 +27,14 @@ export default async function Page({
         <h1 className={`${lusitana.className} text-2xl`}>Zimmerübersicht</h1>
       </div>
       <div className="mt-4 flex items-center justify-between gap-2 md:mt-8">
-        <Search placeholder="Search invoices..." />
+        <RoomFilter />
         <CreateRoom />
       </div>
-      <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
-        <Table query={query} />
+      <Suspense
+        key={`${minibar}${vacant}`}
+        fallback={<InvoicesTableSkeleton />}
+      >
+        <Table roomFilter={{ minibar, vacant }} />
       </Suspense>
       {/* <div className="mt-5 flex w-full justify-center">
         <Pagination totalPages={totalPages} />

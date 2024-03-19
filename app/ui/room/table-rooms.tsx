@@ -2,8 +2,17 @@ import { EditRoom, DeleteRoom, ViewRoom } from '@/app/ui/room/buttons';
 import { fetchRooms } from '@/app/lib/api';
 import RoomStatus from './status';
 
-export default async function RoomTable({ query }: { query: string }) {
-  const rooms = await fetchRooms();
+export type RoomFilter = {
+  minibar: Boolean;
+  vacant: Boolean;
+};
+
+export default async function RoomTable({
+  roomFilter,
+}: {
+  roomFilter: RoomFilter;
+}) {
+  const rooms = await fetchRooms(roomFilter);
 
   return (
     <div className="mt-6 flow-root">
