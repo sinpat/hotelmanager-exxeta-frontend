@@ -21,3 +21,19 @@ export type Booking = {
   startDate: string;
   endDate: string;
 };
+
+/**
+ * Wrapper type for the structure of API responses according to the HATEOAS principle.
+ */
+export type HATEOAS<T> = T & {
+  _links: {
+    self: {
+      href: string;
+    };
+    [key: string]: {
+      href: string;
+    };
+  };
+};
+
+export type RoomHATEOAS = HATEOAS<Room>;
