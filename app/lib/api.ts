@@ -1,7 +1,7 @@
 'use server';
 
 import Axios from 'axios';
-import { Room, RoomUpsert } from './definitions';
+import { Room, RoomHATEOAS, RoomUpsert } from './definitions';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
@@ -16,7 +16,7 @@ export type State = {
   message?: string | null;
 };
 
-const BASE_URL = 'http://localhost:8080';
+const BASE_URL = process.env.BASE_URL || 'http://localhost:8080';
 
 const RoomFormSchema = z.object({
   roomNumber: z.coerce
@@ -46,12 +46,15 @@ export async function fetchRooms(filter: RoomFilter): Promise<Room[]> {
 
 export async function fetchRoomByNumber(
   roomNumber: string | number,
-): Promise<Room | undefined> {
+): Promise<Room | null> {
   return Axios.get<Room>(`${BASE_URL}/room/${roomNumber}`)
     .then((response) => response.data)
     .catch((error) => {
+      if (error.response?.status === 404) {
+        return null;
+      }
       console.error(`There was an error fetching room ${roomNumber}`, error);
-      throw new Error('Failed to fetch room');
+      throw new Error('Failed to fetch room', error);
     });
 }
 
