@@ -1,6 +1,7 @@
 import { EditRoom, DeleteRoom, ViewRoom } from '@/app/ui/room/buttons';
 import { fetchRooms } from '@/app/lib/api';
 import RoomStatus from './status';
+import { mapRoomType } from '@/app/lib/utils';
 
 export type RoomFilter = {
   hasMinibar: Boolean;
@@ -80,7 +81,7 @@ export default async function RoomTable({
                     {room.roomNumber}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
-                    {room.roomType}
+                    {mapRoomType(room.roomType)}
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
                     {room.hasMinibar ? 'Ja' : 'Nein'}

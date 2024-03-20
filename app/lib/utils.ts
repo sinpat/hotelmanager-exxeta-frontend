@@ -11,3 +11,16 @@ export const formatDateToLocal = (
   const formatter = new Intl.DateTimeFormat(locale, options);
   return formatter.format(date);
 };
+
+export const mapRoomType = (type: string) => {
+  switch (type) {
+    case 'SINGLE':
+      return 'Einzelzimmer';
+    case 'DOUBLE':
+      return 'Doppelzimmer';
+    case 'SUITE':
+      return 'Suite';
+    default:
+      return type;
+  }
+};

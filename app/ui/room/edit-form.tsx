@@ -9,6 +9,7 @@ import { Button } from '@/app/ui/button';
 import { useFormState } from 'react-dom';
 import { Room } from '@/app/lib/definitions';
 import { updateRoom } from '@/app/lib/api';
+import { mapRoomType } from '@/app/lib/utils';
 
 export default function EditInvoiceForm({ room }: { room: Room }) {
   const initialState = { message: null, errors: {} };
@@ -72,7 +73,7 @@ export default function EditInvoiceForm({ room }: { room: Room }) {
               </option>
               {['SINGLE', 'DOUBLE', 'SUITE'].map((roomType) => (
                 <option key={roomType} value={roomType}>
-                  {roomType}
+                  {mapRoomType(roomType)}
                 </option>
               ))}
             </select>

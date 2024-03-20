@@ -8,6 +8,7 @@ import {
 import { Button } from '@/app/ui/button';
 import { useFormState } from 'react-dom';
 import { createRoom } from '@/app/lib/api';
+import { mapRoomType } from '@/app/lib/utils';
 
 export default function Form() {
   const initialState = { message: null, errors: {} };
@@ -67,7 +68,7 @@ export default function Form() {
               </option>
               {['SINGLE', 'DOUBLE', 'SUITE'].map((roomType) => (
                 <option key={roomType} value={roomType}>
-                  {roomType}
+                  {mapRoomType(roomType)}
                 </option>
               ))}
             </select>
